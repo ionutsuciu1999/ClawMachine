@@ -1,0 +1,15 @@
+
+img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+@font-face {
+   font-family: FontPixel;
+   src: url(pixelmix.ttf);
+}
+
+* {
+   font-family: FontPixel;
+}
