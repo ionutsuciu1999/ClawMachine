@@ -1,11 +1,13 @@
+@font-face {
+  font-family: pixelmix;
+  src: url(../public/pixelmix.ttf);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: pixelmix;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   width: 100vw;
   height: 100vh;
 }
@@ -15,39 +17,97 @@ body {
 #root{
   height:100%;
 }
+
+/*https://stackoverflow.com/questions/65864203/how-to-make-div-element-auto-resize-maintaining-aspect-ratio*/
 #clawMachineContainer{
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   height: 100%;
 }
-#clawClaw{
-  z-index: 250;
-  position: absolute;
-  width:20%;
-    width: 20%;
-    left: 48%;
-}
+
 #clawMachine{
-  width: 80vw;
-  max-width: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  --r: 170 / 247;
+  aspect-ratio: var(--r);
+  width: min(90%, min(960px, 90vh*(var(--r))));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #clawFront{
   z-index: 500;
   position: absolute;
+  left: 0px;
   width: 100%;
+  height: 100%;
 }
 #clawBack{
-  position: absolute;
   width: 100%;
+  position: absolute;
+  height: 100%;
   z-index: 100;
 }
+
+/*coords*/
+#clawClaw{
+  z-index: 250;
+  position: absolute;
+  width: 24%;
+  top: 5%;
+  left: 12%;
+}
+#clawLeft,#clawLeftPressed{
+  z-index: 1250;
+  position: absolute;
+  width: 16%;
+  top: 75%;
+  left: 6%;
+}
+#clawRight,#clawRightPressed{
+  z-index: 1250;
+  position: absolute;
+  width: 16%;
+  top: 75%;
+  left: 21%;
+}
+#clawGo, #clawGoPressed{
+  z-index: 1250;
+  position: absolute;
+  width: 16%;
+  top: 75%;
+  left: 52%;
+}
+#clawMoney,#clawMoneyPressed{
+  z-index: 1250;
+  position: absolute;
+  width: 10%;
+  top: 86%;
+  left: 54%;
+}
+
+#clawMoneyPressed, #clawGoPressed, #clawRightPressed, #clawLeftPressed{
+  filter: brightness(1.3);
+}
+
+#clawMoney:hover, #clawGo:hover, #clawRight:hover, #clawLeft:hover{
+  cursor:pointer;
+  opacity: 0;
+}
+/*add in a container*/
+#money{
+  z-index: 1250;
+  position: absolute;
+  color:white;
+  top: 77.5%;
+  left: 41%;
+  font-style: italic;
+  font-size: 2cqw;
+}
+
+
 
 
 img {
