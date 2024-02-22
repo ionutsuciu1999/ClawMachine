@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const ClawMachine = (props) => {
     let [money,setMoney] = useState(0);
@@ -7,21 +7,29 @@ const ClawMachine = (props) => {
     let [open,setOpen] = useState(0);
     let moving = 0;
 
+    //get updated left val state inside setTimeout
+    const leftRef = useRef(left);
+    leftRef.current = left;
+
     const stopMove = () =>{
         console.log("Stop");
         moving = 0;
     }
 
-    const moveLoop = (direction) =>{
+    const moveLoop = (direction,amount) =>{
         setTimeout(() => {
-            if(direction=="clawRight"){
-                setLeft((left)=>left+0.5);
-            }else if(direction=="clawLeft"){
-                setLeft((left)=>left-0.5);
+            console.log(leftRef.current);
+            console.log(direction);
+            if(direction=="right" && leftRef.current < 70){
+                setLeft((left)=>left+amount);
+            }else if(direction=="left" && leftRef.current > 11){
+                setLeft((left)=>left-amount);
+            }else if(direction=="down"){
+                setTop((top)=>top+amount);
             }
             
             if(moving == 1){
-                moveLoop(direction);
+                moveLoop(direction,amount);
             }
         }, 10);
     }
@@ -29,20 +37,35 @@ const ClawMachine = (props) => {
     const move = (e) =>{
         console.log(e.target.id);
         moving = 1;
-        moveLoop(e.target.id);
+        if(e.target.id=="clawRight"){moveLoop("right",0.5)}
+        if(e.target.id=="clawLeft"){moveLoop("left",0.5)}
+        if(e.target.id=="clawGo"){getPrize()}
+    }
+
+    const getPrize = () =>{
+        console.log("gerpize");
+        setOpen(1);
+        moveLoop("down",20);
+    }
+    const moveDown = () =>{
+
     }
 
     useEffect(() => {
         document.getElementById("clawRight").addEventListener("mousedown",move);
         document.getElementById("clawLeft").addEventListener("mousedown",move);
-        document.addEventListener("dragend",stopMove);
-        document.addEventListener("mouseup",stopMove);
+        document.getElementById("clawRight").addEventListener("dragend",stopMove);
+        document.getElementById("clawRight").addEventListener("mouseup",stopMove);
+        document.getElementById("clawLeft").addEventListener("dragend",stopMove);
+        document.getElementById("clawLeft").addEventListener("mouseup",stopMove);
+        document.getElementById("clawGo").addEventListener("click",getPrize);
 
         return () => {
             document.getElementById("clawRight").removeEventListener("mousedown",move);
             document.getElementById("clawLeft").removeEventListener("mousedown",move);
             document.removeEventListener("dragend",stopMove);
             document.removeEventListener("mouseup",stopMove);
+            document.getElementById("clawGo").removeEventListener("click",getPrize);
         }
     },[]);
 
