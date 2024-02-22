@@ -56,9 +56,21 @@ body {
   z-index: 250;
   position: absolute;
   width: 24%;
-  top: 5%;
-  left: 12%;
+  animation: swinging 3.5s ease-in-out forwards infinite;
+  transform-origin: 50% 0;
 }
+@keyframes swinging {
+  0% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-1deg)
+  }
+  100% {
+    transform: rotate(2deg);
+  }
+}
+
 #clawLeft,#clawLeftPressed{
   z-index: 1250;
   position: absolute;
