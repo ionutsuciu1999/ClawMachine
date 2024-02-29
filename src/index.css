@@ -43,22 +43,26 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
+  filter: drop-shadow(5px 5px 10px #00325da1);
 }
 #clawBack{
   width: 100%;
   position: absolute;
   height: 100%;
   z-index: 100;
+  /*filter: drop-shadow(0px 0px 10px #32354b87);*/
 }
 
 /*coords*/
 #clawClaw{
   z-index: 250;
   position: absolute;
-  width: 24%;
+  width: 19%;
   animation: swinging 3.5s ease-in-out forwards infinite;
   transform-origin: 50% 0;
+  filter: drop-shadow(50px -36px 8px #5a668cd4);
 }
+
 @keyframes swinging {
   0% {
     transform: rotate(2deg);
@@ -70,6 +74,24 @@ body {
     transform: rotate(2deg);
   }
 }
+
+#clawCube{
+  width: 33%;
+  filter: drop-shadow(50px -36px 8px #5a668cd4);
+}
+#clawCubeContainer{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width:19%;
+  height: 52%;
+  z-index: 250;
+  position: absolute;
+  animation: swinging 3.5s ease-in-out backwards infinite;
+  transform-origin: 50% 0;
+  animation-direction: reverse;
+}
+
 
 #clawLeft,#clawLeftPressed{
   z-index: 1250;
