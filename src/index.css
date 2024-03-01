@@ -75,9 +75,26 @@ body {
   }
 }
 
+.blinking{
+  animation: blinking 0.5s ease-in-out forwards infinite;
+}
+
+@keyframes blinking {
+  0% {
+    filter: brightness(2);
+  }
+  50% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(2);
+  }
+}
+
 #clawCube{
   width: 33%;
-  filter: drop-shadow(50px -36px 8px #5a668cd4);
+  filter: grayscale(1) sepia(5) saturate(1) contrast(1.5) saturate(2) drop-shadow(50px -36px 8px);
+  color: #00000063;
 }
 #clawCubeContainer{
   display: flex;
